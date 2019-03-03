@@ -17,6 +17,11 @@ from werkzeug.security import check_password_hash
 ###
 # Routing for your application.
 ###
+@app.route('/secure_page')
+@login_required
+def secure_page():
+    """Render Secure Page"""
+    return render_template('secure_page.html')
 
 @app.route('/')
 def home():
@@ -55,7 +60,7 @@ def login():
 
             # remember to flash a message to the user
                 flash('Logged in successfully.')
-                return redirect(url_for("secure-page"))  # they should be redirected to a secure-page route instead
+                return redirect(url_for("secure_page"))  # they should be redirected to a secure-page route instead
     return render_template("login.html", form=form)
 
 
